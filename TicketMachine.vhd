@@ -61,7 +61,11 @@ begin
                     when tunggu_uang =>
                         timer <= timer + 1;
                         uang_balik <= '0';
-                        
+
+                        if uang_balik = '1' then
+                            uang_kembalian <= uang;
+                            state <= kembalikan_uang;
+                        end if;                        
                         
                         if timer = 89 then
                             state <= menu_stasiun;
