@@ -24,27 +24,27 @@ BEGIN
     BEGIN
         input <= 'A';
         WAIT FOR period;
-        if output = "1110111" then
+        IF output = "1110111" THEN
             REPORT "Menunjukkan huruf A: " & INTEGER'image(to_integer(unsigned(output))) SEVERITY Note;
-        end if;
+        END IF;
 
         input <= 'B';
         WAIT FOR period;
-        if output = "0011111" then
+        IF output = "0011111" THEN
             REPORT "Menunjukkan huruf B: " & INTEGER'image(to_integer(unsigned(output))) SEVERITY Note;
-        end if;
+        END IF;
 
         input <= 'C';
         WAIT FOR period;
-        if output = "1001110" then
+        IF output = "1001110" THEN
             REPORT "Menunjukkan huruf C: " & INTEGER'image(to_integer(unsigned(output))) SEVERITY Note;
-        end if;
-        
+        END IF;
+
         input <= 'D';
         WAIT FOR period;
-        if output = "0111101" then
+        IF output = "0111101" THEN
             REPORT "Menunjukkan huruf D: " & INTEGER'image(to_integer(unsigned(output))) SEVERITY Note;
-        end if;
+        END IF;
         WAIT;
     END PROCESS;
 END ARCHITECTURE rtl;
