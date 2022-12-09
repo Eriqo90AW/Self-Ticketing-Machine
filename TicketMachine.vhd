@@ -13,7 +13,7 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
         PORT (
             BCDin : IN CHARACTER;
             Seven_Segment : OUT STD_LOGIC_VECTOR (6 DOWNTO 0));
-    END COMPONENT;
+        end COMPONENT;
 
     TYPE state_type IS (main_menu, waiting_input, refund, change_out, ticket_out);
     SIGNAL stasiun : INTEGER RANGE 0 TO 4 := 0;
