@@ -1,5 +1,7 @@
-LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE ieee.math_real.ALL;
 
 ENTITY TicketMachine IS
     PORT (
@@ -13,7 +15,7 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
         PORT (
             BCDin : IN CHARACTER;
             Seven_Segment : OUT STD_LOGIC_VECTOR (6 DOWNTO 0));
-        end COMPONENT;
+    END COMPONENT;
 
     TYPE state_type IS (main_menu, waiting_input, refund, change_out, ticket_out);
     SIGNAL stasiun : INTEGER RANGE 0 TO 4 := 0;
@@ -28,7 +30,9 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
     SIGNAL display_output : STD_LOGIC_VECTOR (6 DOWNTO 0);
 
 BEGIN
+    display : display_station PORT MAP(BCDin => kode_stasiun, Seven_Segment => display_output);
     PROCESS (clk, cancel)
+        CONSTANT period : TIME := 50 ns;
     BEGIN
         IF cancel = '1' THEN
             kembalian <= '0';
@@ -96,6 +100,10 @@ BEGIN
                     -- stasiun A, harga: 3 ribu
                     IF stasiun = 1 THEN
                         kode_stasiun <= 'A';
+                        WAIT FOR period;
+                        IF display_output = "1110111" THEN
+                            REPORT "Menunjukkan huruf A: " & INTEGER'image(to_integer(unsigned(display_output))) SEVERITY Note;
+                        END IF;
                         tarif <= 3000;
                         IF uang = 3000 THEN
                             state <= ticket_out;
@@ -110,6 +118,10 @@ BEGIN
                         -- stasiun B, harga: 5 ribu
                     ELSIF stasiun = 2 THEN
                         kode_stasiun <= 'B';
+                        WAIT FOR period;
+                        IF display_output = "0011111" THEN
+                            REPORT "Menunjukkan huruf B: " & INTEGER'image(to_integer(unsigned(display_output))) SEVERITY Note;
+                        END IF;
                         tarif <= 5000;
                         IF uang = 5000 THEN
                             state <= ticket_out;
@@ -124,6 +136,10 @@ BEGIN
                         -- stasiun C, harga: 9 ribu
                     ELSIF stasiun = 3 THEN
                         kode_stasiun <= 'C';
+                        WAIT FOR period;
+                        IF display_output = "1001110" THEN
+                            REPORT "Menunjukkan huruf C: " & INTEGER'image(to_integer(unsigned(display_output))) SEVERITY Note;
+                        END IF;
                         tarif <= 9000;
                         IF uang = 9000 THEN
                             state <= ticket_out;
@@ -138,6 +154,10 @@ BEGIN
                         -- stasiun D, harga: 13 ribu
                     ELSIF stasiun = 4 THEN
                         kode_stasiun <= 'D';
+                        WAIT FOR period;
+                        IF display_output = "0111101" THEN
+                            REPORT "Menunjukkan huruf D: " & INTEGER'image(to_integer(unsigned(display_output))) SEVERITY Note;
+                        END IF;
                         tarif <= 13000;
                         IF uang = 13000 THEN
                             state <= ticket_out;
@@ -174,7 +194,5 @@ BEGIN
             END CASE;
         END IF;
     END PROCESS;
-
-    display : display_station PORT MAP(BCDin => kode_stasiun, Seven_Segment => display_output);
 
 END mesin_tiket_sederhana;

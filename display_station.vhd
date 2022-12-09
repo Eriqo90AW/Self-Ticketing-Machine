@@ -23,7 +23,7 @@ BEGIN
             WHEN 'D' =>
                 Seven_Segment <= "0111101"; --D
             WHEN OTHERS =>
-                Seven_Segment <= "1111111"; --K
+                Seven_Segment <= "1111111"; --Others
         END CASE;
 
     END PROCESS;
