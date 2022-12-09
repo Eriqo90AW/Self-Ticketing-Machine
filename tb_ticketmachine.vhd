@@ -30,21 +30,21 @@ BEGIN
         seribu <= '1';
         stasiunA <= '1';
         WAIT FOR period;
-        if Outticket = '1' then
+        IF Outticket = '1' THEN
             REPORT "Ticket berhasil dibeli " SEVERITY NOTE;
-        elsif Outticket = '0' then
+        ELSIF Outticket = '0' THEN
             REPORT "Ticket gagal dibeli " SEVERITY NOTE;
-        end if;
-        if Outkembalian = '1' then
+        END IF;
+        IF Outkembalian = '1' THEN
             REPORT "Terdapat Kembalian" SEVERITY NOTE;
-        elsif Outkembalian = '0' then
+        ELSIF Outkembalian = '0' THEN
             REPORT "Uang cukup" SEVERITY NOTE;
-        end if;
-        if Outuang_balik = '1' then
+        END IF;
+        IF Outuang_balik = '1' THEN
             REPORT "Uang dikembalikan" SEVERITY NOTE;
-        elsif Outuang_balik = '0' then
+        ELSIF Outuang_balik = '0' THEN
             REPORT "Uang tidak dikembalikan" SEVERITY NOTE;
-        end if;
+        END IF;
         -- ASSERT(Outticket = '0') REPORT "Ticket gagal dibeli " SEVERITY NOTE;
         -- ASSERT(Outkembalian = '0') REPORT "Uang tidak cukup" SEVERITY NOTE;
         -- ASSERT(Outuang_balik = '1') REPORT "Uang kembali" SEVERITY NOTE;
@@ -54,21 +54,21 @@ BEGIN
         lima_ribu <= '0';
         stasiunB <= '1';
         WAIT FOR period;
-        if Outticket = '1' then
+        IF Outticket = '1' THEN
             REPORT "Ticket berhasil dibeli " SEVERITY NOTE;
-        elsif Outticket = '0' then
+        ELSIF Outticket = '0' THEN
             REPORT "Ticket gagal dibeli " SEVERITY NOTE;
-        end if;
-        if Outkembalian = '1' then
+        END IF;
+        IF Outkembalian = '1' THEN
             REPORT "Terdapat Kembalian" SEVERITY NOTE;
-        elsif Outkembalian = '0' then
+        ELSIF Outkembalian = '0' THEN
             REPORT "Uang cukup" SEVERITY NOTE;
-        end if;
-        if Outuang_balik = '1' then
+        END IF;
+        IF Outuang_balik = '1' THEN
             REPORT "Uang dikembalikan" SEVERITY NOTE;
-        elsif Outuang_balik = '0' then
+        ELSIF Outuang_balik = '0' THEN
             REPORT "Uang tidak dikembalikan" SEVERITY NOTE;
-        end if;
+        END IF;
         -- ASSERT(Outticket = '1') REPORT "Ticket berhasil dibeli " SEVERITY NOTE;
         -- ASSERT(Outkembalian = '0') REPORT "Uang cukup" SEVERITY NOTE;
         -- ASSERT(Outuang_balik = '0') REPORT "Uang kembali" SEVERITY NOTE;
@@ -78,21 +78,21 @@ BEGIN
         sepuluh_ribu <= '1';
         stasiunC <= '1';
         WAIT FOR period;
-        if Outticket = '1' then
+        IF Outticket = '1' THEN
             REPORT "Ticket berhasil dibeli " SEVERITY NOTE;
-        elsif Outticket = '0' then
+        ELSIF Outticket = '0' THEN
             REPORT "Ticket gagal dibeli " SEVERITY NOTE;
-        end if;
-        if Outkembalian = '1' then
+        END IF;
+        IF Outkembalian = '1' THEN
             REPORT "Terdapat Kembalian" SEVERITY NOTE;
-        elsif Outkembalian = '0' then
+        ELSIF Outkembalian = '0' THEN
             REPORT "Uang cukup" SEVERITY NOTE;
-        end if;
-        if Outuang_balik = '1' then
+        END IF;
+        IF Outuang_balik = '1' THEN
             REPORT "Uang dikembalikan" SEVERITY NOTE;
-        elsif Outuang_balik = '0' then
+        ELSIF Outuang_balik = '0' THEN
             REPORT "Uang tidak dikembalikan" SEVERITY NOTE;
-        end if;
+        END IF;
         -- ASSERT(Outticket = '1') REPORT "Ticket berhasil dibeli " SEVERITY NOTE;
         -- ASSERT(Outkembalian = '1') REPORT "Kembali Rp. 1000" SEVERITY NOTE;
         -- ASSERT(Outuang_balik = '0') REPORT "Uang kembali" SEVERITY NOTE;
