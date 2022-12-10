@@ -50,6 +50,7 @@ BEGIN
         WAIT FOR period;
         lima_ribu <= '0';
         WAIT FOR period;
+        assert Outticket = '0' report "Ticket gagal dibeli" severity note;
         WAIT;
     END PROCESS;
 

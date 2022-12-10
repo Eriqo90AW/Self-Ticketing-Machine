@@ -168,29 +168,15 @@ BEGIN
                     kembalian <= '1';
                     uang_kembalian <= uang - tarif;
                     state <= ticket_out;
-                    -- wait_time <= wait_time + 1;
-                    -- IF wait_time = 2 THEN
-                    --     state <= ticket_out;
-                    --     wait_time <= 0;
-                    -- END IF;
 
                 WHEN refund =>
                     uang_balik_signal <= '1';
                     uang_balik <= '1';
                     state <= waiting_input;
-                    -- wait_time <= wait_time + 1;
-                    -- IF wait_time = 2 THEN
-                    --     state <= waiting_input;
-                    --     wait_time <= 0;
-                    -- END IF;
 
                 WHEN ticket_out =>
                     ticket <= '1';
                     state <= main_menu;
-                    -- wait_time <= wait_time + 1;
-                    -- IF wait_time = 2 THEN
-                    --     state <= main_menu;
-                    -- END IF;
             END CASE;
         END IF;
     END PROCESS;
