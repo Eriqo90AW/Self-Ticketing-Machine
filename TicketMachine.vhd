@@ -16,6 +16,11 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
             BCDin : IN CHARACTER;
             Seven_Segment : OUT STD_LOGIC_VECTOR (6 DOWNTO 0));
     END COMPONENT;
+    COMPONENT print_ticket IS
+        PORT (
+            kode_stasiun : IN CHARACTER;
+            harga_ticket : IN INTEGER);
+    END COMPONENT;
 
     TYPE state_type IS (main_menu, waiting_input, refund, change_out, ticket_out);
     SIGNAL stasiun : INTEGER RANGE 0 TO 4 := 0;
@@ -31,6 +36,7 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
 
 BEGIN
     display : display_station PORT MAP(BCDin => kode_stasiun, Seven_Segment => display_output);
+    print : print_ticket PORT MAP(kode_stasiun => kode_stasiun, harga_ticket => tarif);
     PROCESS (clk, cancel)
         CONSTANT period : TIME := 50 ns;
     BEGIN
@@ -187,6 +193,7 @@ BEGIN
 
                 WHEN ticket_out =>
                     ticket <= '1';
+
                     wait_time <= wait_time + 1;
                     IF wait_time = 2 THEN
                         state <= main_menu;
