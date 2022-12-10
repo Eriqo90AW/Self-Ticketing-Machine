@@ -10,7 +10,7 @@ ENTITY TicketMachine IS
         kembalian, ticket, uang_balik : OUT STD_LOGIC);
 END TicketMachine;
 
-ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
+ARCHITECTURE mesin_tiket OF TicketMachine IS
     COMPONENT display_station IS
         PORT (
             BCDin : IN CHARACTER;
@@ -30,6 +30,7 @@ ARCHITECTURE mesin_tiket_sederhana OF TicketMachine IS
     SIGNAL tarif : INTEGER := 0;
     SIGNAL uang : INTEGER := 0;
     SIGNAL uang_kembalian : INTEGER := 0;
+    SIGNAL uang_balik_signal : STD_LOGIC;
 
     SIGNAL kode_stasiun : CHARACTER;
     SIGNAL display_output : STD_LOGIC_VECTOR (6 DOWNTO 0);
@@ -46,6 +47,7 @@ BEGIN
             tarif <= 0;
             wait_time <= 0;
             uang_kembalian <= 0;
+            uang_balik_signal <= '1';
             uang_balik <= '1';
             uang <= 0;
             stasiun <= 0;
@@ -59,6 +61,7 @@ BEGIN
                     uang <= 0;
                     stasiun <= 0;
                     kembalian <= '0';
+                    uang_balik_signal <= '0';
                     uang_balik <= '0';
                     ticket <= '0';
                     tarif <= 0;
@@ -80,9 +83,10 @@ BEGIN
 
                 WHEN waiting_input =>
                     timer <= timer + 1;
+                    uang_balik_signal <= '0';
                     uang_balik <= '0';
 
-                    IF uang_balik = '1' THEN
+                    IF uang_balik_signal = '1' THEN
                         uang_kembalian <= uang;
                         state <= refund;
                     END IF;
@@ -106,7 +110,6 @@ BEGIN
                     -- stasiun A, harga: 3 ribu
                     IF stasiun = 1 THEN
                         kode_stasiun <= 'A';
-                        WAIT FOR period;
                         tarif <= 3000;
                         IF uang = 3000 THEN
                             state <= ticket_out;
@@ -121,7 +124,6 @@ BEGIN
                         -- stasiun B, harga: 5 ribu
                     ELSIF stasiun = 2 THEN
                         kode_stasiun <= 'B';
-                        WAIT FOR period;
                         tarif <= 5000;
                         IF uang = 5000 THEN
                             state <= ticket_out;
@@ -165,27 +167,32 @@ BEGIN
                 WHEN change_out =>
                     kembalian <= '1';
                     uang_kembalian <= uang - tarif;
-                    wait_time <= wait_time + 1;
-                    IF wait_time = 2 THEN
-                        state <= ticket_out;
-                    END IF;
+                    state <= ticket_out;
+                    -- wait_time <= wait_time + 1;
+                    -- IF wait_time = 2 THEN
+                    --     state <= ticket_out;
+                    --     wait_time <= 0;
+                    -- END IF;
 
                 WHEN refund =>
+                    uang_balik_signal <= '1';
                     uang_balik <= '1';
-                    wait_time <= wait_time + 1;
-                    IF wait_time = 2 THEN
-                        state <= waiting_input;
-                    END IF;
+                    state <= waiting_input;
+                    -- wait_time <= wait_time + 1;
+                    -- IF wait_time = 2 THEN
+                    --     state <= waiting_input;
+                    --     wait_time <= 0;
+                    -- END IF;
 
                 WHEN ticket_out =>
                     ticket <= '1';
-
-                    wait_time <= wait_time + 1;
-                    IF wait_time = 2 THEN
-                        state <= main_menu;
-                    END IF;
+                    state <= main_menu;
+                    -- wait_time <= wait_time + 1;
+                    -- IF wait_time = 2 THEN
+                    --     state <= main_menu;
+                    -- END IF;
             END CASE;
         END IF;
     END PROCESS;
 
-END mesin_tiket_sederhana;
+END mesin_tiket;
