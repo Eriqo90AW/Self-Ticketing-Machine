@@ -21,6 +21,11 @@ Self Ticketing Machine use VHDL code in making the system. This program made by 
 - Overall, the self-ticketing machine for trains offers a convenient and efficient solution for purchasing tickets, making the process of taking the train more streamlined and enjoyable for passengers.
 
 ---
+## Program Diagram Schematic
+Here is a picture of the program diagram that has been created :
+![B](https://user-images.githubusercontent.com/88435892/206864528-f3a75837-ee29-45f4-834d-ebdbf8b7d682.png)
+
+---
 ## Features
 The self-ticketing machine for trains offers a number of useful features to make the ticket purchasing process easy and convenient for passengers. Some of these features include :
 
