@@ -1,4 +1,5 @@
 # Final Project PSD Group B4
+# Description Video on Youtube: https://youtu.be/NTWaMfEjRP4
 ## 🎫 Self Ticket Machine 🎫
 > A self-ticketing machine is a device that allows passengers to purchase train tickets without the need for assistance from a ticket agent. These machines are typically found at train stations and can be used by passengers to quickly and easily purchase tickets for their desired destination. Using a self-ticketing machine has several benefits. In addition to being convenient, it also allows passengers to avoid lines at the ticket counter and ensures that they can easily obtain a ticket before boarding the train.
 ---
